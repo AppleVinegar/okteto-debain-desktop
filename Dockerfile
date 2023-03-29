@@ -1,6 +1,9 @@
-FROM debian
-RUN apt update
-RUN DEBIAN_FRONTEND=noninteractive apt install firefox-esr mate-system-monitor  git lxde tightvncserver wget   -y
+FROM centos:7.8.2003
+RUN yum -y update && \
+    yum -y install epel-release && \
+    yum -y groupinstall "X Window System" && \
+    yum -y install firefox mate-system-monitor git lxde-common tightvnc-server wget && \
+    yum clean all
 RUN wget https://github.com/novnc/noVNC/archive/refs/tags/v1.2.0.tar.gz
 RUN tar -xvf v1.2.0.tar.gz
 RUN mkdir  /root/.vnc
